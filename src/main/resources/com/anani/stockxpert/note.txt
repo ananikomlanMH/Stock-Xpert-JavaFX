@@ -1,0 +1,1 @@
+--add-exports javafx.base/com.sun.javafx.event=org.controlsfx.controls

@@ -1,0 +1,249 @@
+.button {
+    -fx-background-color: #06603a;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+}
+
+.sideBarBtn {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-width: 1px;
+    -fx-border-color: #06603a;
+    -fx-text-fill: #06603a;
+    -fx-border-radius: 4px;
+}
+
+.button-secondary:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+}
+
+
+.closeBtn {
+    -fx-border-width: 1px;
+    -fx-border-color: #064f33;
+}
+
+
+.button:hover {
+    -fx-background-color: #064f33;
+}
+
+.button:pressed {
+    -fx-background-color: #064f33;
+}
+
+.footerModal {
+    -fx-background-color: #efefef;
+    -fx-border-color: rgba(204, 204, 204, 0.5);
+    -fx-border-width: 1px 0 0 0;
+}
+.boder-pane{
+    -fx-border-color: #064f33;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+.activeSideBtn {
+    -fx-background-color: #064f33;
+    -fx-border-color: #fff;
+    -fx-border-width: 0 0 0 2px;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-color: #e5e5e5;
+    -fx-font-family: 'Century Gothic';
+}
+.table-view .low-stock {
+    -fx-background-color: rgba(183, 14, 14, 0.3);
+}
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-cell-size: 20;
+    -fx-background-color: #06603a;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .label {
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .cell {
+    -fx-cell-size: 30;
+    -fx-alignment: center-left;
+    -fx-text-fill: #000000;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(6, 96, 58, 0.3);
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #06603a;
+}
+
+.table-row-cell:selected .button {
+    -fx-text-fill: #fff;
+}
+
+.table-view .cell .button {
+    -fx-text-fill: #fff;
+}
+
+.table-row-cell:selected .button .text {
+    -fx-text-fill: #fff !important;
+}
+
+.table-row-cell .button .text {
+    -fx-text-fill: #fff;
+}
+
+.table-row-cell:selected .cell {
+    -fx-border-color: rgba(6, 96, 58, 0.5);
+}
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+
+}
+
+.text-field, .choice-box, .combo-box, .date-picker {
+    -fx-background-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 4px;
+}
+
+.combo-box-base .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-min-width: 100%;
+}
+
+.combo-box-base .text-field .list-view .list-cell:hover{
+    -fx-background-color: #06603a;
+}
+.combo-box-base .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box-base .list-view .list-cell:hover {
+    -fx-background-color: #06603a;
+}
+
+.combo-box-base .list-view .list-cell:focused {
+    -fx-background-color: #06603a;
+}
+
+.text-field:focused, .choice-box:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: #06603a;
+
+}
+
+.progress-bar .track {
+    -fx-background-color: #06603a;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #fff;
+}
+
+.table-view .arrow {
+    -fx-mark-color: white;
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: derive(#06603a, 80%);
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+    -fx-pref-height: 1px;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(#06603a, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+/* chart properties */
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: transparent;
+    -fx-legend-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-border-width: 0px;
+}
+
+.tab-pane {
+    -fx-background-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-color: #e5e5e5;
+    -fx-font-family: 'Century Gothic';
+}
+
+.tab-pane .column-header {
+    -fx-background-color: #06603a;
+    -fx-font-weight: bold;
+}
+
+.tab-header-area .tab-header-background {
+    -fx-background-color: #06603a;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #064f33;
+    -fx-border-width: 1px;
+    -fx-border-color: #06603a;
+    -fx-border-radius: 5px 5px 0px 0px;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #fff;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #06603a;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    /*-fx-padding: 0 10 0 10;*/
+}
+
+.btn-noborder{
+    -fx-border-radius: 0;
+}
+
+.btn-noborder:disabled{
+    -fx-border-color: #b2b2b2;
+}

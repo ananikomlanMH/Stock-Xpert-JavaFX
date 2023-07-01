@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anani.stockxpert.Controllers.DashboardController">
+   <children>
+      <ScrollPane prefHeight="563.0" prefWidth="835.0" style="-fx-background-color: #fff;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1120.0" prefWidth="819.0" style="-fx-background-color: #fff;">
+               <children>
+                  <BarChart fx:id="barChartRevenue" layoutX="12.0" layoutY="574.0" prefHeight="533.0" prefWidth="796.0">
+                    <xAxis>
+                      <CategoryAxis fx:id="revenue" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="mois" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <PieChart fx:id="articleCategoriePie" layoutX="2.0" layoutY="2.0" prefHeight="544.0" prefWidth="810.0" title="Test" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

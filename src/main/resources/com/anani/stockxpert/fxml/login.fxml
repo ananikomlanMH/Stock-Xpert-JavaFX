@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="922.0" style="-fx-background-color: #fff;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.anani.stockxpert.Controllers.LoginController">
+   <children>
+      <ImageView fitHeight="569.0" fitWidth="560.0" layoutX="-28.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Fingerprint-cuate.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="288.0" layoutX="561.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo_black.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="login" focusTraversable="false" layoutX="532.0" layoutY="213.0" prefHeight="44.0" prefWidth="346.0" promptText="Username">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" focusTraversable="false" layoutX="532.0" layoutY="286.0" prefHeight="44.0" prefWidth="346.0" promptText="Password">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="loginBtn" layoutX="532.0" layoutY="356.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="346.0" text="Se conneter">
+         <font>
+            <Font name="Century Gothic" size="17.0" />
+         </font>
+      </Button>
+      <Text fill="#757575" layoutX="562.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2023 Anani Komlan Mawulom H. Tous droits réservés.">
+         <font>
+            <Font name="Century Gothic" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#2c2c2c" layoutX="587.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identifiez-vous pour accéder à StockXpert.">
+         <font>
+            <Font name="Century Gothic" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnQuitApp" alignment="BASELINE_CENTER" layoutX="889.0" mnemonicParsing="false" onAction="#quitApp" prefHeight="17.0" prefWidth="1.0" style="-fx-background-color: none;" stylesheets="@../css/style.css">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../images/close_144px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
