@@ -21,12 +21,12 @@
             <Image url="@../images/logo_black.png" />
          </image>
       </ImageView>
-      <TextField fx:id="login" focusTraversable="false" layoutX="532.0" layoutY="213.0" prefHeight="44.0" prefWidth="346.0" promptText="Username">
+      <TextField fx:id="login" layoutX="532.0" layoutY="213.0" prefHeight="44.0" prefWidth="346.0" promptText="Username">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="password" focusTraversable="false" layoutX="532.0" layoutY="286.0" prefHeight="44.0" prefWidth="346.0" promptText="Password">
+      <PasswordField fx:id="password" layoutX="532.0" layoutY="286.0" prefHeight="44.0" prefWidth="346.0" promptText="Password">
          <font>
             <Font name="Century Gothic" size="15.0" />
          </font>

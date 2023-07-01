@@ -5,6 +5,8 @@ import com.anani.stockxpert.Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
@@ -14,50 +16,48 @@ public class UtilisateurRepository implements com.anani.stockxpert.Service.Utili
     private Transaction transaction;
     private Session session;
 
-    public UtilisateurRepository(){
+    public UtilisateurRepository() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     @Override
-    public List<Utilisateur>getAll(){
+    public List<Utilisateur> getAll() {
         session = sessionFactory.openSession();
-        try{
+        try {
             String hql = "From Utilisateur ";
 
             return session.createQuery(hql).list();
-        }
-        finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
-    public void save(Utilisateur utilisateur){
+    public void save(Utilisateur utilisateur) {
         session = sessionFactory.openSession();
 
-        try{
+        try {
             transaction = session.beginTransaction();
 
             session.persist(utilisateur);
 
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            if(transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
     }
 
     @Override
-    public void edit(Utilisateur utilisateur){
+    public void edit(Utilisateur utilisateur) {
         session = sessionFactory.openSession();
 
-        try{
+        try {
             transaction = session.beginTransaction();
 
             Utilisateur data = session.get(Utilisateur.class, utilisateur.getId());
@@ -71,35 +71,52 @@ public class UtilisateurRepository implements com.anani.stockxpert.Service.Utili
 
             transaction.commit();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            if(transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
-        }
-        finally {
+        } finally {
             session.close();
         }
 
     }
 
     @Override
-    public void delete(Integer id){
+    public void delete(Integer id) {
         session = sessionFactory.openSession();
 
-        try{
+        try {
             transaction = session.beginTransaction();
 
             Utilisateur utilisateur = session.get(Utilisateur.class, id);
             session.remove(utilisateur);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            if(transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
+        } finally {
+            session.close();
         }
-        finally {
+    }
+
+    @Override
+    public Boolean login(String login, String password) {
+        session = sessionFactory.openSession();
+        try {
+            String hql = "FROM Utilisateur u WHERE u.login = :login";
+            Query<Utilisateur> query = session.createQuery(hql, Utilisateur.class);
+            query.setParameter("login", login);
+            Utilisateur user = query.uniqueResult();
+            if (user == null) {
+                return false;
+            } else {
+                String ps = user.getPassword();
+                return BCrypt.checkpw(password, ps);
+            }
+        } finally {
             session.close();
         }
     }

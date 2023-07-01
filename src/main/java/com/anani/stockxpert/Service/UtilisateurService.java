@@ -12,4 +12,6 @@ public interface UtilisateurService {
     void edit(Utilisateur utilisateur);
 
     void delete(Integer id);
+
+    Boolean login(String login, String password);
 }

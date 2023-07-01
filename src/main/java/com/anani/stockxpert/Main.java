@@ -1,6 +1,8 @@
 package com.anani.stockxpert;
 
+import com.anani.stockxpert.Repository.UtilisateurRepository;
 import com.anani.stockxpert.Util.AlertDialog;
+import com.anani.stockxpert.Util.SessionManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -87,65 +89,70 @@ public class Main extends Application {
                                 loginBtn.setOnAction(event -> {
                                     if (!login.getText().isEmpty() && !password.getText().isEmpty()) {
 
-                                        FXMLLoader fxmlLoader0 = new FXMLLoader(Main.class.getResource("fxml/loader.fxml"));
-                                        try {
-                                            Scene scene1 = new Scene(fxmlLoader0.load());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        stage.setTitle("StockXpert");
-                                        stage.setScene(scene0);
-                                        stage.show();
+                                        if (new UtilisateurRepository().login(login.getText(), password.getText())) {
+//                                            SessionManager.getInstance().login(user);
 
-                                        new Thread(() -> {
-                                            for (double progress2 = 0.75; progress2 <= 1.0; progress2 += 0.01) {
-                                                final double updateProgress2 = progress2;
-                                                Platform.runLater(() -> progressBar.setProgress(updateProgress2));
-
-                                                try {
-                                                    Thread.sleep(25); // Attendre pendant 50 millisecondes
-                                                    progressPourcentage.setText(String.valueOf((int) Math.round(updateProgress2 * 100)) + "%");
-
-                                                    if (updateProgress2 <= 0.8) {
-                                                        progressText.setText("Validation des données");
-                                                    } else if (updateProgress2 <= 0.9) {
-                                                        progressText.setText("Finalisation");
-                                                    }
-
-                                                    if (updateProgress2 >= 0.99) {
-                                                        progressText.setText("Ouverture");
-                                                        Platform.runLater(() -> {
-                                                            try {
-                                                                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/main.fxml"));
-                                                                Scene scene = new Scene(fxmlLoader.load());
-
-
-                                                                scene.setOnMousePressed(mouseEvent -> {
-                                                                    x = mouseEvent.getSceneX();
-                                                                    y = mouseEvent.getSceneY();
-                                                                });
-
-                                                                scene.setOnMouseDragged(mouseEvent -> {
-                                                                    stage.setX(mouseEvent.getScreenX() - x);
-                                                                    stage.setY(mouseEvent.getScreenY() - y);
-                                                                });
-
-                                                                stage.setTitle("StockXpert");
-                                                                stage.setScene(scene);
-                                                                stage.centerOnScreen();
-
-                                                                stage.show();
-                                                            } catch (IOException e) {
-                                                                e.printStackTrace();
-                                                            }
-                                                        });
-                                                    }
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
+                                            FXMLLoader fxmlLoader0 = new FXMLLoader(Main.class.getResource("fxml/loader.fxml"));
+                                            try {
+                                                Scene scene1 = new Scene(fxmlLoader0.load());
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
                                             }
-                                        }).start();
+                                            stage.setTitle("StockXpert");
+                                            stage.setScene(scene0);
+                                            stage.show();
 
+                                            new Thread(() -> {
+                                                for (double progress2 = 0.75; progress2 <= 1.0; progress2 += 0.01) {
+                                                    final double updateProgress2 = progress2;
+                                                    Platform.runLater(() -> progressBar.setProgress(updateProgress2));
+
+                                                    try {
+                                                        Thread.sleep(25); // Attendre pendant 50 millisecondes
+                                                        progressPourcentage.setText(String.valueOf((int) Math.round(updateProgress2 * 100)) + "%");
+
+                                                        if (updateProgress2 <= 0.8) {
+                                                            progressText.setText("Validation des données");
+                                                        } else if (updateProgress2 <= 0.9) {
+                                                            progressText.setText("Finalisation");
+                                                        }
+
+                                                        if (updateProgress2 >= 0.99) {
+                                                            progressText.setText("Ouverture");
+                                                            Platform.runLater(() -> {
+                                                                try {
+                                                                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/main.fxml"));
+                                                                    Scene scene = new Scene(fxmlLoader.load());
+
+
+                                                                    scene.setOnMousePressed(mouseEvent -> {
+                                                                        x = mouseEvent.getSceneX();
+                                                                        y = mouseEvent.getSceneY();
+                                                                    });
+
+                                                                    scene.setOnMouseDragged(mouseEvent -> {
+                                                                        stage.setX(mouseEvent.getScreenX() - x);
+                                                                        stage.setY(mouseEvent.getScreenY() - y);
+                                                                    });
+
+                                                                    stage.setTitle("StockXpert");
+                                                                    stage.setScene(scene);
+                                                                    stage.centerOnScreen();
+
+                                                                    stage.show();
+                                                                } catch (IOException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            });
+                                                        }
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+                                        } else {
+                                            AlertDialog.warningDialog("Login ou password invalide!");
+                                        }
                                     } else {
                                         AlertDialog.warningDialog("Login ou password invalide!");
                                     }
