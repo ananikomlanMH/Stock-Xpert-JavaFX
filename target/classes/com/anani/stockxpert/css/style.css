@@ -63,6 +63,7 @@
 .table-view .low-stock {
     -fx-background-color: rgba(183, 14, 14, 0.3);
 }
+
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size: 20;

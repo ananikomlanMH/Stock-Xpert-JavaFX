@@ -243,7 +243,7 @@ public class MainController implements Initializable {
     }
 
     private void InventairePage() throws IOException {
-        Parent fxml = FXMLLoader.load(Main.class.getResource("fxml/inventaire.fxml"));
+        Parent fxml = FXMLLoader.load(Main.class.getResource("fxml/Inventaire/index.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }

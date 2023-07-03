@@ -13,7 +13,7 @@
    <children>
       <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="searchTextField" layoutX="5.0" onKeyReleased="#searchData" prefHeight="37.0" prefWidth="653.0" promptText="Rechercher..." stylesheets="@../../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="0.0">
+            <TextField fx:id="searchTextField" layoutX="5.0" onKeyReleased="#searchData" prefHeight="38.0" prefWidth="546.0" promptText="Rechercher..." stylesheets="@../../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="224.60000000000002" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Century Gothic" size="14.0" />
                </font>
@@ -23,6 +23,18 @@
                   <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/plus_math_144px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Century Gothic" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="RIGHT" layoutX="558.0" layoutY="1.0" mnemonicParsing="false" onAction="#printStock" prefHeight="35.0" prefWidth="103.0" stylesheets="@../../css/utils.css" text="Imprimer" textFill="WHITE" AnchorPane.bottomAnchor="2.1999999999999957" AnchorPane.rightAnchor="114.79999999999995" AnchorPane.topAnchor="1.0">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/print_144px.png" />
                      </image>
                   </ImageView>
                </graphic>

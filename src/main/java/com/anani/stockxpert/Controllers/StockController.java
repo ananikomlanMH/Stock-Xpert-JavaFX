@@ -2,12 +2,25 @@ package com.anani.stockxpert.Controllers;
 
 import com.anani.stockxpert.Main;
 import com.anani.stockxpert.Model.Article;
+import com.anani.stockxpert.Model.FactureArticle;
 import com.anani.stockxpert.Model.Stock;
 import com.anani.stockxpert.Repository.ArticleRepository;
 import com.anani.stockxpert.Repository.StockRepository;
 import com.anani.stockxpert.Service.ArticleService;
 import com.anani.stockxpert.Service.StockService;
 import com.anani.stockxpert.Util.AlertDialog;
+import com.anani.stockxpert.Util.ConversionNombreEnLettre;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceRgb;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +33,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -27,9 +42,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
@@ -352,4 +374,107 @@ public class StockController implements Initializable {
         stage.show();
     }
 
+    public void printStock(ActionEvent event) throws IOException {
+        String userHomeDir = System.getProperty("user.home");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String date = String.format("%d_%d_%d", month, day, year);
+
+        String DEST = userHomeDir + "/Desktop/StockXpert/Stock/situation_stock" + date + "_" + timestamp.getTime() + ".pdf";
+
+        String repertoireStockXpert = userHomeDir + "/Desktop/StockXpert/Stock";
+        File repertoire = new File(repertoireStockXpert);
+        if (!repertoire.exists()) {
+            boolean creationRepertoire = repertoire.mkdirs();
+        }
+
+        PdfDocument pdf = new PdfDocument(new PdfWriter(DEST));
+        Document document = new Document(pdf);
+
+        String imFile = Main.class.getResource("images/header.png").getFile();
+        ImageData data = ImageDataFactory.create(imFile);
+
+        // Creating an Image object
+        com.itextpdf.layout.element.Image image = new com.itextpdf.layout.element.Image(data);
+
+        // Adding image to the document
+        document.add(image);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+        String line = "Situation de stock au:" + formatter.format(new Date());
+
+        // Creating a table
+        Table table = new Table(2).setMarginTop(10).setWidthPercent(100);
+
+        // Adding cells to the table
+        table.addCell(new com.itextpdf.layout.element.Cell().add(new Paragraph(line).setBold().setTextAlignment(TextAlignment.LEFT).setUnderline().setFontColor(new DeviceRgb(6, 96, 58))).setBorder(Border.NO_BORDER));
+        table.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
+
+        // Adding Table to document
+        document.add(table);
+
+
+        float [] pointColumnWidths = {1, 4, 3, 1, 1, 1};
+        Table table_items = new Table(pointColumnWidths).setMarginTop(20).setWidthPercent(100);
+
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("#").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Article").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Catégorie").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Prix").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Qte Alerte").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Qte Stock").setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+
+        List<Stock> items = stockService.getAll();
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        int count = 1;
+        int total = 0;
+        for (Stock stock: items){
+            Color color_row;
+            if (stock.getQte_stock() <= stock.getQte_alerte()){
+                color_row = new DeviceRgb(220, 53, 70);
+            }else {
+                color_row = new DeviceRgb(255, 255, 255);
+            }
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(String.valueOf(count)).setBackgroundColor(color_row, (float) 0.3));
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(stock.getArticle().getLibelle()).setBackgroundColor(color_row, (float) 0.3));
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(stock.getArticle().getCategorie().getLibelle()).setBackgroundColor(color_row, (float) 0.3));
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(decimalFormat.format(stock.getArticle().getPv())).setBackgroundColor(color_row, (float) 0.3));
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(decimalFormat.format(stock.getQte_alerte())).setBackgroundColor(color_row, (float) 0.3));
+            table_items.addCell(new com.itextpdf.layout.element.Cell().add(decimalFormat.format(stock.getQte_stock())).setBackgroundColor(color_row, (float) 0.3));
+            count++;
+            total += stock.getQte_stock();
+        }
+
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add("Total").setTextAlignment(TextAlignment.CENTER).setBackgroundColor(new DeviceRgb(6,96,58)).setFontColor(Color.WHITE));
+        table_items.addCell(new com.itextpdf.layout.element.Cell().add(decimalFormat.format(total)));
+
+        document.add(table_items);
+
+        String text = "*Veuillez conserver cet document dans vos archive.";
+        Paragraph para = new Paragraph (text).setMarginTop(15).setItalic();
+        document.add(para);
+
+        document.close();
+
+        File pdfFile = new File(DEST);
+        if (pdfFile.exists()) {
+
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(pdfFile);
+            } else {
+                AlertDialog.errorDialog("Awt Desktop is not supported!");
+            }
+
+        } else {
+            AlertDialog.errorDialog("File is not exists!");
+        }
+    }
 }

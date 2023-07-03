@@ -207,9 +207,9 @@ public class VenteController implements Initializable {
         String userHomeDir = System.getProperty("user.home");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        String DEST = userHomeDir + "/stock_xpert_doc/" + facture.getNum() + "_" + timestamp.getTime() + ".pdf";
+        String DEST = userHomeDir + "/Desktop/StockXpert/Invoice/" + facture.getNum() + "_" + timestamp.getTime() + ".pdf";
 
-        String repertoireStockXpert = userHomeDir + "/stock_xpert_doc";
+        String repertoireStockXpert = userHomeDir + "/Desktop/StockXpert/Invoice";
         File repertoire = new File(repertoireStockXpert);
         if (!repertoire.exists()) {
             boolean creationRepertoire = repertoire.mkdirs();
@@ -282,7 +282,7 @@ public class VenteController implements Initializable {
 
         // Creating a table
         float [] pointColumnWidths2 = {200F, 200F, 50F};
-        Table table2 = new Table(pointColumnWidths2).setMarginTop(15).setWidthPercent(100);
+        Table table2 = new Table(pointColumnWidths2).setMarginTop(0).setWidthPercent(100);
 
         String imFile2 = Main.class.getResource("images/cachet.png").getFile();
         ImageData data2 = ImageDataFactory.create(imFile2);
@@ -293,7 +293,7 @@ public class VenteController implements Initializable {
         // Adding cells to the table
         table2.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
         table2.addCell(new com.itextpdf.layout.element.Cell().add("").setBorder(Border.NO_BORDER));
-        table2.addCell(new com.itextpdf.layout.element.Cell().add(image2.setTextAlignment(TextAlignment.RIGHT).setWidth(80)).setBorder(Border.NO_BORDER));
+        table2.addCell(new com.itextpdf.layout.element.Cell().add(image2.setTextAlignment(TextAlignment.RIGHT).setWidth(120)).setBorder(Border.NO_BORDER));
 
         document.add(table2);
 

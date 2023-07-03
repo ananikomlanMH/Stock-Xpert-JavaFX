@@ -81,14 +81,13 @@ public class Main extends Application {
                                 stage.setScene(scene_login);
                                 stage.centerOnScreen();
 
-                                stage.show();
-
                                 Button loginBtn = (Button) scene_login.lookup("#loginBtn");
                                 TextField login = (TextField) scene_login.lookup("#login");
                                 TextField password = (TextField) scene_login.lookup("#password");
                                 loginBtn.setOnAction(event -> {
+                                    loginBtn.setDisable(true);
+                                    loginBtn.setDisable(true);
                                     if (!login.getText().isEmpty() && !password.getText().isEmpty()) {
-
                                         if (new UtilisateurRepository().login(login.getText(), password.getText())) {
 //                                            SessionManager.getInstance().login(user);
 
@@ -124,7 +123,6 @@ public class Main extends Application {
                                                                     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("fxml/main.fxml"));
                                                                     Scene scene = new Scene(fxmlLoader.load());
 
-
                                                                     scene.setOnMousePressed(mouseEvent -> {
                                                                         x = mouseEvent.getSceneX();
                                                                         y = mouseEvent.getSceneY();
@@ -151,12 +149,17 @@ public class Main extends Application {
                                                 }
                                             }).start();
                                         } else {
+                                            loginBtn.setDisable(false);
                                             AlertDialog.warningDialog("Login ou password invalide!");
                                         }
                                     } else {
+                                        loginBtn.setDisable(false);
                                         AlertDialog.warningDialog("Login ou password invalide!");
                                     }
                                 });
+
+                                stage.show();
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
