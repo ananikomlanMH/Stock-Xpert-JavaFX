@@ -65,7 +65,7 @@
          <children>
             <Text fx:id="totalQte" fill="#064f33" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="103.20000000000005">
                <font>
-                  <Font name="Century Gothic Bold" size="14.0" />
+                  <Font name="Century Gothic" size="14.0" />
                </font>
             </Text>
          </children>

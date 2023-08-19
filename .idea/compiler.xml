@@ -13,8 +13,5 @@
         <module name="StockXpert" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="StockXpert" target="0" />
-    </bytecodeTargetLevel>
   </component>
 </project>
