@@ -36,6 +36,8 @@
         <columns>
           <TableColumn fx:id="colId" prefWidth="74.4000244140625" text="#" />
           <TableColumn fx:id="colDate" prefWidth="697.6000061035156" text="Date" />
+            <TableColumn fx:id="colArticles" prefWidth="697.6000061035156" text="Articles" />
+            <TableColumn fx:id="colInventoriste" prefWidth="697.6000061035156" text="Inventoriste" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
